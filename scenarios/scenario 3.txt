@@ -1,0 +1,373 @@
+#----------- SCENARIO - ITERATION 3 ------#
+## presenation of group, share extension ##
+
+# base: 
+# 3 users, 6 tasks
+# 1st with 1, 2nd with 2, 3rd with 3 tasks
+# their id: 1 - [1], 2 - [2, 3], 3 - [4, 5, 6]
+
+# scenario:
+# u1 share task with u2, u3
+# u2 create group and add u1
+# u1 create group task
+# u2 add u3 and try to share group task with u3
+# u3 share all his tasks
+# - check all users pings
+# - check all users taks
+# u3 leave the group
+# - check all users tasks
+
+#-----------------BASE--------------------#
+
+## users James, Rocky
+
+# mutation {
+#   registration(
+#     firstName: "James", 
+#     lastName: "Bond", 
+#     birthdate: "1963-04-13", 
+#     jobTitle: "007",
+#   	company: "Universal Exports", 
+#     email: "admin@eon.co.uk",
+#     password: "MyNumberIs007",
+#     repeatedPassword: "MyNumberIs007") {
+#     ok
+#     errorInfo
+#     user {
+#       id
+#       sessionKey
+#     }
+#   }
+# }
+
+# mutation {
+#   registration(
+#     firstName: "Rocky", 
+#     lastName: "Balboa", 
+#     birthdate: "1945-07-06", 
+#     jobTitle: "Roki",
+#   	company: "OnePunch", 
+#     email: "punch@o.ne",
+#     password: "1PunchMan",
+#     repeatedPassword: "1PunchMan") {
+#     ok
+#     errorInfo
+#     user {
+#       id
+#       sessionKey
+#     }
+#   }
+# }
+
+# mutation {
+#   registration(
+#     firstName: "Jackie", 
+#     lastName: "Chan", 
+#     birthdate: "1954-04-07", 
+#     jobTitle: "Master",
+#   	company: "Empire", 
+#     email: "eye.of.the@tig.er",
+#     password: "Around80Day",
+#     repeatedPassword: "Around80Day") {
+#     ok
+#     errorInfo
+#     user {
+#       id
+#       sessionKey
+#     }
+#   }
+# }
+
+# N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW
+
+# pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR
+
+# GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT
+
+# mutation {
+#   addTask(
+#     sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW",
+#   	name: "task 1.1",
+#   	executionDate: "2031-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+# mutation {
+#   addTask(
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#   	name: "task 2.1",
+#   	executionDate: "2032-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+# mutation {
+#   addTask(
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#   	name: "task 2.2",
+#   	executionDate: "2033-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+# mutation {
+#   addTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#   	name: "task 3.1",
+#   	executionDate: "2034-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+# mutation {
+#   addTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#   	name: "task 3.2",
+#   	executionDate: "2035-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+# mutation {
+#   addTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#   	name: "task 3.3",
+#   	executionDate: "2030-10-10",
+#   ) {
+#     ok
+#   }
+# }
+
+#-----------------SCENARIO----------------#
+
+## u1 share task with u2, u3
+
+# mutation {
+#   shareTask(
+#     sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW",
+#     taskId: 1,
+#     userId: 2
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# mutation {
+#   shareTask(
+#     sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW",
+#     taskId: 1,
+#     userId: 3
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+## u2 create group and add u1
+
+# mutation {
+#   addGroup(
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#     name: "Group",
+#   ) {
+#     ok
+#     errorInfo
+#     group {
+#       id
+#       name
+#       owner {
+# 	   id
+#         firstName
+#         lastName
+#       }
+#     }
+#   }
+# }
+
+# mutation {
+#   addGroupMember(
+#     groupId: 1,
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#     userId: 1
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+## u1 create group task
+
+# mutation {
+#   addTask(
+#     sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW",
+#   	name: "group task",
+#   	executionDate: "2029-10-10",
+#     groupId: 1
+#   ) {
+#     ok
+#     errorInfo
+# 			task {
+# 				id
+# 			}
+#   }
+# }
+
+## u2 add u3 and try to share group task with u3
+
+# mutation {
+#   addGroupMember(
+#     groupId: 1,
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#     userId: 3
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# mutation {
+#   shareTask(
+#     sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR",
+#     taskId: 7,
+#     userId: 3
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# u3 share all his taks
+
+# mutation {
+#   shareTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#     taskId: 4,
+#     groupId: 1
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# mutation {
+#   shareTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#     taskId: 5,
+#     groupId: 1
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# mutation {
+#   shareTask(
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#     taskId: 6,
+#     groupId: 1
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# - check all users pings
+
+# query {
+#   pingList(sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW") {
+#     pingType
+#     message
+#     task {
+# 				id
+#       name
+#     }
+#   }
+# }
+
+# query {
+#   pingList(sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR") {
+#     pingType
+#     message
+#     task {
+# 				id
+#       name
+#     }
+#   }
+# }
+
+# query {
+#   pingList(sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT") {
+#     pingType
+#     message
+#     task {
+# 				id
+#       name
+#     }
+#   }
+# }
+
+# - check all users taks
+
+# query {
+#   userTasks(sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW") {
+#     name
+#     personalDate
+#   }
+# }
+
+# query {
+#   userTasks(sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR") {
+#     name
+#     personalDate
+#   }
+# }
+
+# query {
+#   userTasks(sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT") {
+#     name
+#     personalDate
+#   }
+# }
+
+# u3 leave the group
+
+# mutation {
+#   leaveGroup (
+#     sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT",
+#     groupId: 1
+#   ) {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# - check all users tasks
+
+# query {
+#   userTasks(sessionKey: "N9hTUPsCGzr80S8JJhRDaCAfu8mTJ1ygJV1Tg1TtO63cftCw1kPk3sB3g2zj9fkW") {
+#     name
+#     personalDate
+#   }
+# }
+
+# query {
+#   userTasks(sessionKey: "pChuUtZeAJjtcoBi3FrvvR8ViSO1bPgC54tYMpNzjQmk1j7nF6Uvd9ZUVwdv4VcR") {
+#     name
+#     personalDate
+#   }
+# }
+
+# query {
+#   userTasks(sessionKey: "GzS9CFm29zNPMJb1BfU2gTFQHkwlLsqTphjl8p48O88WJ7DyGDDG1VstG9WNRLdT") {
+#     name
+#     personalDate
+#   }
+# }
+

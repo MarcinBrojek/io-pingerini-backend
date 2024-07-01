@@ -1,0 +1,217 @@
+# Welcome to GraphiQL
+#
+# GraphiQL is an in-browser tool for writing, validating, and
+# testing GraphQL queries.
+#
+# Type queries into this side of the screen, and you will see intelligent
+# typeaheads aware of the current GraphQL type schema and live syntax and
+# validation errors highlighted within the text.
+#
+# GraphQL queries typically start with a "{" character. Lines that start
+# with a # are ignored.
+#
+# An example GraphQL query might look like:
+#
+#     {
+#       field(arg: "value") {
+#         subField
+#       }
+#     }
+#
+# Keyboard shortcuts:
+#
+#  Prettify Query:  Shift-Ctrl-P (or press the prettify button above)
+#
+#     Merge Query:  Shift-Ctrl-M (or press the merge button above)
+#
+#       Run Query:  Ctrl-Enter (or press the play button above)
+#
+#   Auto Complete:  Ctrl-Space (or just start typing)
+#
+
+#----------- SCENARIO - ITERATION 1 ------#
+
+# Login to not existing account
+# mutation {
+#   login(email: "testEmail", password: "testPassword") {
+#     user {
+#       email
+#       sessionKey
+#     }
+#     ok
+#   }
+# }
+
+# Checking fields needed to register
+# failed
+# mutation {
+#   validateName(firstName: "Jack", lastName: "") {
+#     ok
+#     errorInfo
+#   }
+#   validateBirthdate(birthdate: "2040-01-01") {
+#     ok
+#     errorInfo
+#   }
+#   validateJobTitle(jobTitle: "") {
+#     ok
+#     errorInfo
+#   }
+#   validateCompany(company: "") {
+#     ok
+#     errorInfo
+#   }
+#   validateEmail(email: "bad@email") {
+#     ok
+#     errorInfo
+#   }
+#   validatePassword(password: "password", repeatedPassword: "password") {
+#     ok
+#     errorInfo
+#   }
+# }
+# succeed
+# mutation {
+#   validateName(firstName: "James", lastName: "Bond") {
+#     ok
+#     errorInfo
+#   }
+#   validateBirthdate(birthdate: "1920-11-11") {
+#     ok
+#     errorInfo
+#   }
+#   validateJobTitle(jobTitle: "007") {
+#     ok
+#     errorInfo
+#   }
+#   validateCompany(company: "Universal Exports") {
+#     ok
+#     errorInfo
+#   }
+#   validateEmail(email: "admin@eon.co.uk") {
+#     ok
+#     errorInfo
+#   }
+#   validatePassword(password: "MyNumberIs007", repeatedPassword: "MyNumberIs007") {
+#     ok
+#     errorInfo
+#   }
+# }
+
+# Registration
+# mutation {
+#   registration(
+#     firstName: "James", 
+#     lastName: "Bond", 
+#     birthdate: "1920-11-11", 
+#     jobTitle: "007",
+#   	company: "Universal Exports", 
+#     email: "admin@eon.co.uk",
+#     password: "MyNumberIs007",
+#     repeatedPassword: "MyNumberIs007")
+#   {
+#     ok
+#     errorInfo
+#     user {
+#       id
+#     }
+#   }
+# }
+
+# Login to 007 account
+# mutation {
+#   login(email: "admin@eon.co.uk", password: "MyNumberIs007") {
+#     user {
+#       email
+#       sessionKey
+#     }
+#     ok
+#   }
+# }
+
+# Change in profile settings
+# mutation {
+#   userUpdate (
+#     sessionKey: "",
+#     lastName: "Secretan") {
+#     ok
+#     errorInfo
+#     user {
+#       firstName
+# 		lastName
+#     }
+#   }
+# }
+
+# Add tasks to 007
+# mutation {
+# 	addTask (
+#     sessionKey: "", 
+#     executionDate: "2022-10-08", 
+# 			name: "target nb one") {
+#     task {
+#       id
+#       name
+#     }
+#   }
+# }
+# mutation {
+# 	addTask (
+#     sessionKey: "", 
+#     executionDate: "2022-10-09", 
+# 			name: "target nb two") {
+#     task {
+#       id
+#       name
+#     }
+#   }
+# }
+# mutation {
+# 	addTask (
+#     sessionKey: "", 
+#     executionDate: "2022-10-010", 
+# 			name: "target nb three") {
+#     task {
+#       id
+#       name
+#     }
+#   }
+# }
+
+# Update task
+# mutation {
+#     updateTask (
+#     sessionKey: "", 
+#     taskId: , name: "") {
+#     ok
+#     errorInfo
+#     task {
+#       id
+#       name
+#     }
+#   }
+# }
+
+# TODO list
+# query {
+# 	userTasks(sessionKey: "") {
+#     id
+#     name
+#   }
+# }
+
+# Change priority of the task
+# mutation {
+#   changePriorityTask (
+#     sessionKey: "",
+#     taskId: , previousTaskId: ) {
+#     ok
+#     errorInfo
+#     tasks{
+#       id
+#       name
+#     }
+#   }
+# }
+
+

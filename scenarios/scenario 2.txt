@@ -1,0 +1,264 @@
+#----------- SCENARIO - ITERATION 2 ------#
+
+#- user1, user2 register
+#- user2 search user1 and check his tasks (other)
+#- user1 create task1
+#- user1 create task2 and add it to user2
+#- user2 check ping list
+#- user2 search user1 and check his tasks (other)
+#- user2 create ping request about task1 using provided data
+#- user2 create ping request about task2 using provided data
+#- user1 check ping list
+#- user1 ping response about task1 to user2 using provided data
+#- user1 ping response about task2 to user2 using provided data
+#- user2 check ping list
+
+# mutation {
+#   registration(
+#     firstName: "Geralt", 
+#     lastName: "z Rivii", 
+#     birthdate: "1999-09-09", 
+#     jobTitle: "wiedźmin",
+#     company: "Szkoła wilka", 
+#     email: "toss@a.coin",
+#     password: "T34MYenefer",
+#     repeatedPassword: "T34MYenefer"
+#   ) {
+#     ok
+#     user {
+#       sessionKey
+#     }
+#   }
+# }
+# 4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd
+# mutation {
+#   registration(
+#     firstName: "Jaskier", 
+#     lastName: "Julian", 
+#     birthdate: "1999-12-12", 
+#     jobTitle: "Hrabia",
+#     company: "Poeci", 
+#     email: "wice@hra.bia",
+#     password: "Pr1scilla",
+#     repeatedPassword: "Pr1scilla"
+#   ) {
+#     ok
+#     user {
+#       sessionKey
+#     }
+#   }
+# }
+# MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg
+
+# [user2 search user1 and check his tasks]
+
+# query {
+#   users (firstName:"Geralt") {
+#     id
+#   }
+# }
+# query {
+#   otherUserTasks (
+#   sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#   otherId: 1) {
+#     id
+#   }
+# }
+
+# [user1 create task1]
+# [user1 create task2 and add it to user2]
+
+# mutation {
+#   addTask (
+#     sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd", 
+#     executionDate: "2030-01-01", 
+#     name: "task 1") {
+#     task {
+#       id
+#       name
+#     }
+#     ok
+#   }
+# }
+# mutation {
+#   addTask (
+#     sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd", 
+#     executionDate: "2031-01-01", 
+#     name: "task 2",
+#     usersId: [2]) {
+#     task {
+#       id
+#       name
+#     }
+#     ok
+#   }
+# }
+
+# [user2 check ping list]
+
+# query {
+#   pingList (sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg") {
+#     id
+#     pingType
+#     userFrom {
+#       firstName
+#     }
+#     task{
+#       id
+#     }
+#     message
+#   }
+# }
+
+# [user2 search user1 and check his tasks]
+
+# query {
+#   otherUserTasks (
+#   sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#   otherId: 1) {
+#     id
+#     name
+#   }
+# }
+
+# [user2 create ping request about task1 using provided data]
+
+# query {
+#   pingDataForRequest(sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#   taskId: 1
+#   ) {
+#     pingType
+#     task {
+#       id
+#     }
+#     userTo {
+#       id
+#     }
+#   }
+# }
+# mutation {
+#   sendPing (
+#     sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#     otherId: 1,
+#     taskId: 1,
+#     pingType: "Progress request",
+#     message: "Nie ma co mitrężyć"
+#   ) {
+#     ok
+#   }
+# }
+
+# [user2 create ping request about task2 using provided data]
+
+# query {
+#   pingDataForRequest(sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#   taskId: 2
+#   ) {
+#     pingType
+#     task {
+#       id
+#     }
+#     userTo {
+#       id
+#     }
+#   }
+# }
+# mutation {
+#   sendPing (
+#     sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg",
+#     otherId: 1,
+#     taskId: 2,
+#     pingType: "Delay request",
+#     message: "Zaraza"
+#   ) {
+#     ok
+#   }
+# }
+
+# [user1 check ping list]
+
+# query {
+#   pingList (sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd") {
+#     id
+#     pingType
+#     userFrom {
+#       firstName
+#     }
+#     task{
+#       id
+#     }
+#     message
+#     date
+#   }
+# }
+
+# [user1 ping response about task1 to user2 using provided data]
+
+# query {
+#   pingDataForAnswer(sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd",
+#   pingId: 4) {
+#     pingType
+#     userTo{ 
+#       firstName
+#       id
+#     }
+#     task {
+#       id
+#     }
+#   }
+# }
+# mutation {
+#   sendPing (
+#     sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd",
+#     otherId: 2,
+#     taskId: 1,
+#     pingType: "Answer ping",
+#     message: "Poczekaj aż zapadnie zmrok"
+#   ) {
+#     ok
+#   }
+# }
+
+
+# [user1 ping response about task2 to user2 using provided data]
+
+# query {
+#   pingDataForAnswer(sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd",
+#   pingId: 5) {
+#     pingType
+#     userTo{ 
+#       id
+#       firstName
+#     }
+#     task {
+#       id
+#     }
+#   }
+# }
+# mutation {
+#   sendPing (
+#     sessionKey: "4CCKerHttoFQXjnlf4gqe9osnu2fvLDjcFX6Er7IQQEnpXsoKcxHDBsfkLgeapDd",
+#     otherId: 2,
+#     taskId: 2,
+#     pingType: "Answer ping",
+#     message: "Zaraza ...."
+#   ) {
+#     ok
+#   }
+# }
+
+# [user2 check ping list]
+
+# query {
+#   pingList (sessionKey: "MffgzzqXHEVTXcrmTDntO3RGylmA5tauVRqgVtNliptzeAsdQ9oXSLyZ8ZDHNvYg") {
+#     id
+#     pingType
+#     userFrom {
+#       firstName
+#     }
+#     task{
+#       id
+#     }
+#     message
+#   }
+# }
