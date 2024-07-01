@@ -2,7 +2,7 @@
 
 The backend for the Pingerini application is designed to support a simple organizer-style tool that aids teams in managing their work. Pingerini enables the creation and sharing of tasks and primarily focuses on "pinging" - sending short messages for specific purposes such as informing team members about the completion of a task or the need for additional time to complete it. Besides facilitating communication among users, the application allows for the formation of groups, enabling shared responsibility for various tasks.
 
-The backend is built using [Django](https://www.djangoproject.com) and [Graphene](https://graphene-python.org) technologies. It was developed over three iterations, each introducing new functionalities. Changes in the database can be observed in the `UML` files, and updates to the supported API are documented in `api.txt`. Additionally, there are `scenarios` provided in the scenario folder.
+The backend is built using [Django](https://www.djangoproject.com) and [Graphene](https://graphene-python.org) technologies. It was developed over three iterations, each introducing new functionalities. Changes in the database can be observed in the `UML` files, and updates to the supported API are documented in `api.md`. Additionally, there are `scenarios` provided in the scenario folder.
 
 ---
 
@@ -39,3 +39,4 @@ Start server:
 
 Actual UML model:
 
+<img width="1022" src="https://github.com/MarcinBrojek/io-pingerini-backend/assets/73189722/70bf1081-53e1-4ba4-b51e-8be983756e22">
